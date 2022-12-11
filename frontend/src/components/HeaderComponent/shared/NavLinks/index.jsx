@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../Dropdown";
 import { useState } from "react";
@@ -49,18 +49,34 @@ const CartItemBadge = styled.div`
     align-items: center;
     justify-content: center;
 `
-const ChatMessageBadge = styled.div`
+export const ChatMessageBadge = styled.div`
     position: absolute;
     top: 6px;
     right: 2px;
     width: 8px;
     height: 8px;
-    background: #f5880c;
+    background: ${(props) => props.bgColor};
     border-radius: 50%;
     border: 1px solid #fcd303;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    ${(props) => {
+        const {left, right, top} = props;
+        if(left && top){
+            return css`
+            left: ${left};
+            top: ${top};
+        `
+        }
+        if(right && top){
+            return css`
+            right: ${right};
+            top: ${top};
+        `
+        }
+    }}
 `;
 
 const UserNameText = styled.div`
@@ -91,7 +107,7 @@ export default () => {
         <NavLinksWrapper>
             <NavLinkWrap>
                 <NavLink onClick={() => navigate('/admin/orders')}>Admin</NavLink>
-                <ChatMessageBadge/>
+                <ChatMessageBadge bgColor='#f5880c'/>
             </NavLinkWrap>
             <NavLinkWrap>
                 <NavLink>Pricing</NavLink>

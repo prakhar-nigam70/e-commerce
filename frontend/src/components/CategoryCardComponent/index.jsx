@@ -1,26 +1,31 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
 const CategoryCard = styled.div`
-    width: 20%;
-    max-width: 300px;
-    height: 400px;
+    width: 100%;
+    // max-width: 300px;
+    height: 350px;
     border: .7px solid #122241;
-    padding: 5px;
+    padding: 12px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
 `
 const CategoryImage = styled.div`
-    width: 100%%;
-    height: 200px;
+    width: 100%;
+    height: 180px;
     flex: 1;
 `
 const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.9;
+    }
 `
 
 const CategoryData = styled.div`
@@ -34,18 +39,19 @@ const CategoryData = styled.div`
 `
 const CategoryTitle = styled.div`
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500px;
+    cursor: pointer;
     line-height: 24px;
 `
 const CategoryDescription = styled.div`
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
 `
 const CategoryOpenButton = styled.div`
     width: 100px;;
     height: 30px;
-    margin: 15px 0;
     border-radius: 4px;
     background: blue;
     color: #fff;
@@ -61,17 +67,19 @@ const CategoryOpenButton = styled.div`
     }
 `
 
-export default () => {
+export default (props) => {
+    const {title} = props;
+    const navigate = useNavigate();
     return(
         <CategoryCard>
             <CategoryImage>
-                <Image src="/images/categoryCards/electronics.jpg"/>
+                <Image onClick={() => navigate('/product-list')} src="/images/categoryCards/electronics.jpg"/>
             </CategoryImage>
             <CategoryData>
-                <CategoryTitle>Electronics</CategoryTitle>
+                <CategoryTitle onClick={() => navigate('/product-list')}>{title}</CategoryTitle>
                 <CategoryDescription>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias laudantium earum nisi, reprehenderit impedit totam quos veritatis laboriosam voluptas vel?</CategoryDescription>
             </CategoryData>
-            <CategoryOpenButton>Go to Category</CategoryOpenButton>
+            <CategoryOpenButton onClick={() => navigate('/product-list')}>Go to Category</CategoryOpenButton>
         </CategoryCard>
     )
 }
